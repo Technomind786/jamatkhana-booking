@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Login | Jamaat Khana Booking</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">Jamaat Khana Booking</div>
+    <div class="tagline">Admin Access</div>
+</nav>
+
+<!-- LOGIN SECTION -->
+<section class="hero">
+
+    <div class="payment-card" style="max-width:420px;">
+
+        <h1>Admin Login</h1>
+        <p style="opacity:0.85; margin-bottom:20px;">
+            Authorized access only
+        </p>
+
+        <form method="post" action="/admin">
+            <input
+                type="text"
+                name="username"
+                placeholder="Admin Username"
+                required
+                style="width:100%; padding:12px; margin-bottom:15px; border-radius:8px; border:none;"
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+                style="width:100%; padding:12px; margin-bottom:20px; border-radius:8px; border:none;"
+            >
+
+            <button class="book-btn big" style="width:100%;">
+                Login
+            </button>
+        </form>
+
+        <p style="margin-top:20px; font-size:13px; opacity:0.6;">
+            © Jamaat Khana Booking – Admin Panel
+        </p>
+
+    </div>
+
+</section>
+
+</body>
+</html>

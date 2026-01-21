@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #2b0f19, #0f0206);
+    color: white;
+}
+
+/* NAV */
+nav {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #f9a8d4;
+}
+
+.tagline {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
+
+.date-picker {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.date-picker input {
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    width: 250px;
+}
+
+.date-picker button {
+    background: linear-gradient(to right, #ec4899, #db2777);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* HALLS */
+.hall-section {
+    padding: 40px;
+}
+
+.hall-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.hall-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.hall-card:hover {
+    transform: translateY(-12px) scale(1.02);
+}
+
+.hall-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.hall-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.hall-content h3 {
+    margin-bottom: 6px;
+}
+
+/* SUBTLE TEXT (NEW) */
+.small-text {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 6px;
+}
+
+.small-desc {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-bottom: 12px;
+}
+
+/* BADGES */
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.available {
+    background: #16a34a;
+}
+
+.booked {
+    background: #dc2626;
+}
+
+.book-btn {
+    background: linear-gradient(to right, #ec4899, #db2777);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Jamaat Khana Booking</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Calendar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- PAGE TRANSITION + THEME -->
+    <style>
+        body {
+            animation: pageFade 0.5s ease-out;
+            transition: background 0.3s, color 0.3s;
+        }
+        @keyframes pageFade {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* LIGHT MODE */
+        body.light {
+            background: #f4f6f8;
+            color: #111;
+        }
+        body.light nav {
+            background: #fff;
+        }
+        body.light .hall-card,
+        body.light .payment-card {
+            background: #fff;
+            color: #111;
+        }
+
+        /* TOGGLE */
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 18px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.15);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav style="display:flex;justify-content:space-between;align-items:center;">
+    <div>
+        <div class="logo">Jamaat Khana Booking</div>
+        <div class="tagline">Function & Event Hall Booking</div>
+    </div>
+
+    <div class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Book Hall for Any Function</h1>
+    <p>Nikah • Majlis • Waaz • Community Events</p>
+
+    <div class="date-picker">
+        <input type="text" id="datePicker" placeholder="Select Date">
+        <button onclick="submitDate()">Check Availability</button>
+    </div>
+</section>
+
+<!-- HALL LIST -->
+<section class="hall-section">
+    <div class="hall-grid">
+
+        {% for hall in halls %}
+        <div class="hall-card">
+
+            <a href="/hall/{{ hall.id }}?date={{ selected_date }}">
+                <img src="{{ url_for('static', filename='images/hall' ~ loop.index ~ '.jpg') }}">
+            </a>
+
+            <div class="hall-content">
+                <h3>
+                    <a href="/hall/{{ hall.id }}?date={{ selected_date }}" style="color:inherit;text-decoration:none;">
+                        {{ hall.name }}
+                    </a>
+                </h3>
+
+                <p class="small-text">
+                    📍 {{ hall.location }} | 🍽️ {{ hall.capacity }} Thaals
+                </p>
+
+                <p class="small-desc">{{ hall.description }}</p>
+
+                {% if hall.booked %}
+                    <span class="badge booked">BOOKED</span>
+                {% else %}
+                    <form method="post" action="/reserve">
+                        <input type="hidden" name="hall_id" value="{{ hall.id }}">
+                        <input type="hidden" name="date" value="{{ selected_date }}">
+                        <button class="book-btn">Reserve</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+flatpickr("#datePicker", { minDate: "today", dateFormat: "Y-m-d" });
+
+function submitDate() {
+    const d = document.getElementById("datePicker").value;
+    if (!d) return alert("Select a date");
+    window.location.href = "/?date=" + d;
+}
+
+/* THEME LOGIC */
+function toggleTheme() {
+    document.body.classList.toggle("light");
+    const isLight = document.body.classList.contains("light");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+    document.getElementById("themeBtn").innerText = isLight ? "☀️" : "🌙";
+}
+
+/* LOAD SAVED THEME */
+(function () {
+    const saved = localStorage.getItem("theme");
+    if (saved === "light") {
+        document.body.classList.add("light");
+        document.getElementById("themeBtn").innerText = "☀️";
+    }
+})();
+</script>
+
+</body>
+</html>

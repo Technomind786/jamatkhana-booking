@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ hall.hall_name }} | Jamaat Khana Booking</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        /* BACK BUTTON ANIMATION */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding: 12px 22px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn span {
+            transition: transform 0.3s ease;
+            font-size: 18px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.18);
+            transform: translateY(-2px);
+        }
+
+        .back-btn:hover span {
+            transform: translateX(-6px);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">Jamaat Khana Booking</div>
+    <div class="tagline">Hall Details</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-bottom:0;">
+    <h1>{{ hall.hall_name }}</h1>
+    <p>Function & Event Hall</p>
+</section>
+
+<!-- DETAILS -->
+<section class="hall-section">
+
+    <div class="hall-card" style="max-width:900px; margin:0 auto;">
+
+        <img
+            src="{{ url_for('static', filename='images/hall' ~ hall.hall_id ~ '.jpg') }}"
+            alt="{{ hall.hall_name }}"
+            style="width:100%; border-radius:16px; margin-bottom:25px;"
+        >
+
+        <div class="hall-content">
+
+            <p class="small-desc" style="font-size:16px;">
+                {{ hall.description }}
+            </p>
+
+            <p class="small-text" style="margin:18px 0;">
+                📍 <b>Location:</b> {{ hall.location }} <br>
+                🍽️ <b>Capacity:</b> {{ hall.capacity }} Thaals
+            </p>
+
+            {% if booked %}
+                <span class="badge booked">BOOKED ON SELECTED DATE</span>
+            {% else %}
+                {% if selected_date %}
+                    <form method="post" action="/reserve">
+                        <input type="hidden" name="hall_id" value="{{ hall.hall_id }}">
+                        <input type="hidden" name="date" value="{{ selected_date }}">
+                        <button class="book-btn big">Reserve This Hall</button>
+                    </form>
+                {% else %}
+                    <p style="opacity:0.8;">
+                        Please go back and select a date to reserve this hall.
+                    </p>
+                {% endif %}
+            {% endif %}
+
+            <!-- ANIMATED BACK BUTTON -->
+            <a href="/?date={{ selected_date }}" class="back-btn">
+                <span>←</span> Back to All Halls
+            </a>
+
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

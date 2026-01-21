@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Booking Successful</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .success-wrapper {
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 420px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .checkmark {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #22c55e;
+            margin: 0 auto 25px;
+            position: relative;
+            animation: pop 0.5s ease-out;
+        }
+
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 26px;
+            top: 45px;
+            width: 18px;
+            height: 35px;
+            border: solid white;
+            border-width: 0 6px 6px 0;
+            transform: rotate(45deg);
+            animation: draw 0.4s ease forwards;
+        }
+
+        .success-card h1 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+
+        .success-card p {
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        .success-card a {
+            text-decoration: none;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes draw {
+            0% { height: 0; width: 0; }
+            100% { height: 35px; width: 18px; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">Jamaat Khana Booking</div>
+    <div class="tagline">Booking Confirmed</div>
+</nav>
+
+<div class="success-wrapper">
+    <div class="success-card">
+
+        <div class="checkmark"></div>
+
+        <h1>Booking Successful</h1>
+        <p>Your hall has been successfully booked.<br>
+           We wish you a beautiful and blessed event.</p>
+
+        <a href="/">
+            <button class="book-btn">Go Back Home</button>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>

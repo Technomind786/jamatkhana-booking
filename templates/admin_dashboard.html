@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Dashboard | Jamaat Khana Booking</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255,255,255,0.15);
+        }
+
+        tr {
+            background: rgba(255,255,255,0.08);
+        }
+
+        tr:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .status {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .status.booked {
+            background: #22c55e;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav style="display:flex; justify-content:space-between; align-items:center;">
+    <div>
+        <div class="logo">Jamaat Khana Booking</div>
+        <div class="tagline">Admin Dashboard</div>
+    </div>
+
+    <a href="/admin_logout">
+        <button class="book-btn">Logout</button>
+    </a>
+</nav>
+
+
+<!-- DASHBOARD -->
+<section class="hall-section">
+
+    <h1 style="text-align:center;">All Bookings</h1>
+
+    <div class="hall-card" style="overflow-x:auto;">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Hall Name</th>
+                    <th>Event Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.hall_name }}</td>
+                    <td>{{ booking.event_date }}</td>
+                    <td>
+                        <span class="status booked">
+                            {{ booking.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if bookings|length == 0 %}
+            <p style="text-align:center; margin-top:20px; opacity:0.7;">
+                No bookings found.
+            </p>
+        {% endif %}
+
+    </div>
+
+</section>
+
+</body>
+</html>

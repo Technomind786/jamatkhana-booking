@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Confirm Booking</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">Jamaat Khana Booking</div>
+    <div class="tagline">Confirm Your Booking</div>
+</nav>
+
+<!-- PAYMENT SECTION -->
+<section class="hero">
+
+    <div class="payment-card">
+
+        <h1>Booking Summary</h1>
+
+        <div class="payment-details">
+            <p><b>Hall Name:</b> {{ hall.hall_name }}</p>
+            <p><b>Location:</b> {{ hall.location }}</p>
+            <p><b>Capacity:</b> {{ hall.capacity }} Thaals</p>
+            <p><b>Event Date:</b> {{ date }}</p>
+        </div>
+
+        <hr>
+
+        <!-- SAMPLE PAYMENT UI -->
+        <div class="payment-sample">
+            <h3>Payment Method</h3>
+
+            <div class="payment-option active">UPI</div>
+            <div class="payment-option">Card</div>
+            <div class="payment-option">Net Banking</div>
+
+            <p class="note">
+                * This is a sample payment page. No real payment is required.
+            </p>
+        </div>
+
+        <form method="post" action="/confirm_payment">
+            <input type="hidden" name="hall_id" value="{{ hall_id }}">
+            <input type="hidden" name="date" value="{{ date }}">
+            <button class="book-btn big">Confirm Booking</button>
+        </form>
+
+    </div>
+
+</section>
+
+</body>
+</html>
